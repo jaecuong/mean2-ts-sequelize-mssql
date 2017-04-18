@@ -1,0 +1,117 @@
+import { logger } from "../utils/logger";
+import { models, sequelize } from "../models/index";
+import { ProfileAttributes, ProfileInstance } from "../models/interfaces/profile-interface";
+import { Transaction } from "sequelize";
+import * as bcrypt from 'bcryptjs';
+import { encrypt, validatePassword } from '../utils/jwtHelper';
+
+
+export class ProfileService {
+  createProfile(profileAttributes: ProfileAttributes): Promise<ProfileInstance> {
+    let promise = new Promise<ProfileInstance>((resolve: Function, reject: Function) => {
+      sequelize.transaction((t: Transaction) => {
+        return models.Profile.findOne({ where: { email: profileAttributes.Email } }).then((profile: ProfileInstance) => {
+          if (profile) {
+            reject(`Profile with email =  ${profileAttributes.Email} already token`);
+          } else {
+            // Hash Password before Insert To DB
+            // profileAttributes.HashPasswd = bcrypt.hashSync(profileAttributes.Passwd, 10);
+            profileAttributes.Passwd = encrypt(profileAttributes.Passwd);
+
+            return models.Profile.create(profileAttributes).then((profile: ProfileInstance) => {
+              logger.info(`Created profile with email [${profileAttributes.Email}] successful !!!`);
+              resolve(profile);
+            }).catch((error: Error) => {
+              reject(`Created profile with email [${profileAttributes.Email}] error = ${error.message}`);
+            });
+          }
+        }).catch((error: Error) => {
+          logger.error(`Retrieved profile with email =  ${profileAttributes.Email} got error = ${error.message}`);
+          reject(`Retrieved profile with email =  ${profileAttributes.Email} got error = ${error.message}`);
+        });
+
+      });
+    });
+
+    return promise;
+  }
+
+  retrieveProfile(emailParam: string): Promise<ProfileInstance> {
+    let promise = new Promise<ProfileInstance>((resolve: Function, reject: Function) => {
+      sequelize.transaction((t: Transaction) => {
+        return models.Profile.findOne({ where: { email: emailParam } }).then((profile: ProfileInstance) => {
+          if (profile) {
+            logger.info(`Retrieved profile with email ${emailParam} successful !!!`);
+          } else {
+            logger.info(`Profile with email ${emailParam} does not exist.`);
+          }
+          resolve(profile);
+        }).catch((error: Error) => {
+          logger.error(`Retrieved profile with email =  ${emailParam} got error = ${error.message}`);
+          reject(`Retrieved profile with email =  ${emailParam} got error = ${error.message}`);
+        });
+      });
+    });
+
+    return promise;
+  }
+
+  retrieveProfiles(): Promise<Array<ProfileInstance>> {
+    let promise = new Promise<Array<ProfileInstance>>((resolve: Function, reject: Function) => {
+      sequelize.transaction((t: Transaction) => {
+        return models.Profile.findAll().then((profile: Array<ProfileInstance>) => {
+          logger.info(`Retrieved all profile successful !!!`);
+          resolve(profile);
+        }).catch((error: Error) => {
+          logger.error(`Retrieved all profile error = ${error.message}`);
+          reject(`Retrieved all profile error = ${error.message}`);
+        });
+      });
+    });
+
+    return promise;
+  }
+
+  updateProfile(name: string, profileAttributes: any): Promise<void> {
+    let promise = new Promise<void>((resolve: Function, reject: Function) => {
+      sequelize.transaction((t: Transaction) => {
+        return models.Profile.update(profileAttributes, { where: { name: name } })
+          .then((results: [number, Array<ProfileInstance>]) => {
+            if (results.length > 0) {
+              logger.info(`Updated profile with name = ${name} successful !!!`);
+            } else {
+              logger.info(`Updated profile with name = ${name} does not exist.`);
+            }
+            resolve(null);
+          }).catch((error: Error) => {
+            logger.error(`Updated profile with name = ${name} error = ${error.message}`);
+            reject(`Updated profile with name = ${name} error = ${error.message}`);
+          });
+      });
+    });
+
+    return promise;
+  }
+
+  deleteProfile(name: string): Promise<void> {
+    let promise = new Promise<void>((resolve: Function, reject: Function) => {
+      sequelize.transaction((t: Transaction) => {
+        return models.Profile.destroy({ where: { name: name } }).then((afffectedRows: number) => {
+          if (afffectedRows > 0) {
+            logger.info(`Deleted profile with name ${name} successful !!!`);
+          } else {
+            logger.info(`Profile with name ${name} does not exist.`);
+          }
+          resolve(null);
+        }).catch((error: Error) => {
+          logger.error(`Deleted profile with name ${name} error = ${error.message}`);
+          reject(`Deleted profile with name ${name} error = ${error.message}`);
+        });
+      });
+    });
+
+    return promise;
+  }
+}
+
+export const profileService = new ProfileService();
