@@ -25,7 +25,8 @@ import { AlertService, AuthenticationService, UserService, DataService } from '.
   ],
   imports: [
     AppRoutingModule,
-    SharedModule
+    // CoreModule, //Singletonobjects
+    SharedModule //Shared (multi-instance) objects
   ],
   providers: [
     DataService,

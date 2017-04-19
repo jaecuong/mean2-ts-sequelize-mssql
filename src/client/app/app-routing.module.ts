@@ -6,7 +6,7 @@ import { AboutComponent } from './about/about.component';
 import { CatComponent } from './cat/cat.component';
 import { LoginComponent } from './account/login/login.component';
 import { SignupComponent } from './account/signup/signup.component';
-import { AuthGuard } from "app/shared/guard/index";
+import { AuthGuard } from "./shared/guard/index";
 
 const routes: Routes = [
   { path: '', component: HomeComponent,canActivate: [AuthGuard]},

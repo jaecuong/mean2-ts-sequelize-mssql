@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 // import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertService, UserService } from '../../services/index';
-import { ToastComponent } from "app/shared/toast/toast.component";
+import { ToastComponent } from "../../shared/toast/toast.component";
 // import { DataService } from '../services/data.service';
 // import { ToastComponent } from '../shared/toast/toast.component';
 
