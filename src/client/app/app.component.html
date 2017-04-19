@@ -1,0 +1,76 @@
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-menu" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </button>
+                <a class="navbar-brand" ui-sref="main" style="margin-right:30px;"><b>LINK MARKET</b></a>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse collapse" id="collapse-menu" aria-expanded="false" style="height: 1px;">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a routerLink="/" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                            <i class="fa fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/cat" class="nav-item nav-link" routerLinkActive="active">
+                            <i class="fa fa-info-circle"></i> Cat
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/about" class="nav-item nav-link" routerLinkActive="active">
+                            <i class="fa fa-info-circle"></i> About
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                            <i class="fa fa-sign-in"></i> LOGIN
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/signup" class="nav-item nav-link" routerLinkActive="active">
+                            <i class="fa fa-sign-out"></i> SIGN UP
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- /.navbar-nav -->
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!--<alert></alert>-->
+    <div class="body-router">
+        <router-outlet></router-outlet>
+
+    </div>
+
+    <!-- Footer -->
+    <!--<footer class="footer navbar-fixed-bottom">
+        <div class="row">
+            <div class="text-center">
+                Copyright © 2014-2016 Pham Nguyen Co. Ltd.- All rights reserved.
+            </div>
+            <div class="text-center">
+                <a href="https://twitter.com" class="btn btn-twitter btn-social" data-toggle="tooltip" data-placement="top" title="Twitter Account"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.facebook.com" class="btn btn-facebook btn-social" data-toggle="tooltip" data-placement="top" title="Facebook Page"><i class="fa fa-facebook"></i></a>
+                <a href="https://plus.google.com" class="btn btn-gplus btn-social" data-toggle="tooltip" data-placement="top" title="Google+ Profile"><i class="fa fa-google-plus"></i></a>
+            </div>
+        </div>
+    </footer>-->
+    <!-- /.Footer -->
+
+</div>

@@ -1,0 +1,48 @@
+<div class="center-block animated zoomInUp" style="border: 0px solid #083858; width: 450px; padding: 0 10px 20px 20px;">
+    <h1 class="text-center" style="color: #083858;">Sign Up</h1>
+
+    <form class="form" name="form" ng-submit="register(form)" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label style="color: #083858;" for="firstName">First Name</label><br/>
+            <input type="text" name="firstName" placeholder="Enter First Name" class="form-control" [(ngModel)]="model.firstName" #firstName="ngModel" required autofocus/>
+            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label style="color: #083858;" for="lastName">Last Name</label><br/>
+            <input type="text" name="lastName" placeholder="Enter Last Name" class="form-control" [(ngModel)]="model.lastName" #lastName="ngModel" required/>
+            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label style="color: #083858;" for="username">Email</label><br/>
+            <input type="email" name="email" placeholder="Enter email" class="form-control" [(ngModel)]="model.username" #username="ngModel" required />
+            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label style="color: #083858;" for="password">Password</label><br/>
+            <input type="password" name="password" placeholder="Enter passwordi" class="form-control" [(ngModel)]="model.password" #password="ngModel" required/>
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary btn-lg btn-login" [disabled]="isLoading">
+            Sign up
+            </button>
+             <img *ngIf="isLoading" src="../../../assets/loader.gif" />
+            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+        </div>
+
+        <!--<div>
+            <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+                <i class="fa fa-facebook"></i> Connect with Facebook
+            </a>
+            <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+                <i class="fa fa-twitter"></i> Connect with Twitter
+            </a>
+        </div>-->
+
+    </form>
+
+</div>

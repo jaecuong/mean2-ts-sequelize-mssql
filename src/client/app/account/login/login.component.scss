@@ -1,0 +1,24 @@
+
+
+/* style for message error */
+
+input.ng-valid,
+input.ng-prestine,
+input.ng-invalid {
+    border-left: 15px solid dodgerblue !important;
+    border: 1px solid dodgerblue;
+}
+
+input.ng-valid {
+    border: 1px solid dodgerblue;
+    background-color: white;
+}
+
+input.ng-invaid {
+    background-color: red;
+}
+
+.err-message {
+    font-size: 18px;
+    color: red;
+}

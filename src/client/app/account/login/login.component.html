@@ -1,0 +1,38 @@
+<div class="center-block" style="border: 0px solid #083858; width: 450px; padding: 0 10px 20px 20px;">
+    <h1 class="text-center" style="color: #083858;">Login</h1>
+    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label style="color: #083858;" for="loginEmail">Email</label><br/>
+            <input type="email" name="loginEmail" class="form-control" placeholder="Enter email" [(ngModel)]="model.username" #username="ngModel" required autofocus>
+            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label style="color: #083858;" for="password">Password</label><br/>
+            <input type="password" name="password" placeholder="Enter password" class="form-control" [(ngModel)]="model.password" #password="ngModel" required>
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-inverse btn-lg btn-primary" [disabled]="isLoading">
+            Login
+            </button>
+            <img *ngIf="isLoading" src="../../../assets/loader.gif" />
+            <a [routerLink]="['/signup']" class="btn btn-link">Signup</a>
+        </div>
+
+        <!--
+        <hr>
+        <div>
+            <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+                <i class="fa fa-facebook"></i> Connect with Facebook
+            </a>
+            <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+                <i class="fa fa-twitter"></i> Connect with Twitter
+            </a>
+        </div>-->
+    </form>
+
+
+
+</div>

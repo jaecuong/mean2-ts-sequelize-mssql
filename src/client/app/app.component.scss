@@ -1,0 +1,59 @@
+$color-nav-default:white;
+$color-nav:#3399ff;
+$nav-bg:#333333;
+$nav-border:#2d89ef;
+
+/* Navbar */
+.navbar-default
+.navbar-brand {
+    color: $color-nav;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: $nav-bg;
+}
+
+.navbar-default{
+    background-color: $nav-bg;
+    border: 0px;
+}
+.navbar.navbar-default .navbar-nav>li>a{
+    color: $color-nav-default;
+}
+.navbar.navbar-default .navbar-nav>li>a:hover,
+.navbar.navbar-default .navbar-nav>li>a:focus{
+    background-color: $nav-bg;
+    color: $color-nav-default;
+    border-bottom: 3px solid $color-nav;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    /*background-color: $color-nav-default;*/
+    background-color: $nav-bg;
+    color: $color-nav-default;
+    border-bottom: 3px solid $nav-border;
+}
+
+
+
+/* Navbar Toggle Icon */
+.navbar-default .navbar-toggle,
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: $nav-border;
+}
+
+
+.footer{
+    background-color: $nav-bg;
+    color: $color-nav;
+    padding-top: 15px;
+    min-width: 960px;
+}
+
+.body-router{
+margin-bottom:10px;
+}
+
+
