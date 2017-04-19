@@ -4,18 +4,24 @@ import * as compression from "compression";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 // import * as expressJwt from 'express-Jwt';
+// import jwt from "jsonwebtoken";
+// import passport from "passport";
+// import passportJWT from "passport-jwt";
+// const ExtractJwt = passportJWT.ExtractJwt;
+// const JwtStrategy = passportJWT.Strategy;
+
 import * as http from "http";
 import * as morgan from "morgan";
 import * as os from "os";
 import * as path from "path";
 // import * as cors from "cors";
-import { configs } from "../configs/configs";
-import { logger, skip, stream } from "./utils/logger";
+import { configs } from "../configs/index";
+import { logger, skip, stream } from "./utils/index";
 // import { router as productRouter } from "./routers/product-router";
 import { sequelize } from "./models/index";
 import { Express, Request, Response } from "express";
 import { Worker } from "cluster";
-import { globalRoute } from "./routers/index";
+import { globalRoute } from "./routes/index";
 // import { flash } from 'connect-flash';
 // import { session } from 'express-session';
 // import { passport } from 'passport';
@@ -43,7 +49,6 @@ class Server {
 
   constructor() {
     this._app = express();
-    // this.passportSetup();
 
     this._app.use(compression());
     this._app.use(bodyParser.json()); // Parses urlencoded bodies
@@ -71,6 +76,7 @@ class Server {
     this._server = http.createServer(this._app);
 
   }
+
 
 
   private _onError(error: NodeJS.ErrnoException): void {
@@ -106,8 +112,8 @@ class Server {
     if (cluster.isMaster) {
       sequelize.sync().then(() => {
         logger.info("Database synced.");
-
-        for (let c = 0; c < os.cpus().length; c++) {
+        logger.info(`Cluster is running on CPU with ${os.cpus().length} logical processors`);
+        for (let c = 0; c < os.cpus().length - 1; c++) {
           cluster.fork();
         }
 

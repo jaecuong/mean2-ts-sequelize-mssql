@@ -2,8 +2,8 @@ import * as cls from "continuation-local-storage";
 import * as fs from "fs";
 import * as path from "path";
 import * as SequelizeStatic from "sequelize";
-import { configs } from "../../configs/configs";
-import { logger } from "../utils/logger";
+import { configs } from "../../configs/index";
+import { logger } from "../utils/index";
 import { ProductAttributes, ProductInstance } from "./interfaces/product-interface";
 import { ProfileInstance, ProfileAttributes } from "./interfaces/profile-interface";
 import { Sequelize } from "sequelize";
@@ -57,3 +57,5 @@ class Database {
 const database = new Database();
 export const models = database.getModels();
 export const sequelize = database.getSequelize();
+
+

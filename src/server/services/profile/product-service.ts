@@ -1,9 +1,9 @@
-import { logger } from "../utils/logger";
-import { models, sequelize } from "../models/index";
-import { ProductAttributes, ProductInstance } from "../models/interfaces/product-interface";
+import { logger } from "../../utils/index";
+import { models, sequelize } from "../../models/index";
+import { ProductAttributes, ProductInstance } from "../../models/interfaces/product-interface";
 import { Transaction } from "sequelize";
 
-export class ProductService {
+class ProductService {
   createProduct(productAttributes: ProductAttributes): Promise<ProductInstance> {
     let promise = new Promise<ProductInstance>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
@@ -82,7 +82,7 @@ export class ProductService {
       sequelize.transaction((t: Transaction) => {
         return models.Product.destroy({ where: { name: name } }).then((afffectedRows: number) => {
           if (afffectedRows > 0) {
-            logger.info(`Deleted product with name ${name} successful !!!`);            
+            logger.info(`Deleted product with name ${name} successful !!!`);
           } else {
             logger.info(`Product with name ${name} does not exist.`);
           }

@@ -1,12 +1,12 @@
-import { logger } from "../utils/logger";
-import { models, sequelize } from "../models/index";
-import { ProfileAttributes, ProfileInstance } from "../models/interfaces/profile-interface";
+import { logger } from "../../utils/index";
+import { models, sequelize } from "../../models/index";
+import { ProfileAttributes, ProfileInstance } from "../../models/interfaces/profile-interface";
 import { Transaction } from "sequelize";
 import * as bcrypt from 'bcryptjs';
-import { encrypt, validatePassword } from '../utils/jwtHelper';
+import { encrypt, validatePassword } from '../../utils/jwtHelper';
 
 
-export class ProfileService {
+class ProfileService {
   createProfile(profileAttributes: ProfileAttributes): Promise<ProfileInstance> {
     let promise = new Promise<ProfileInstance>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
@@ -36,7 +36,7 @@ export class ProfileService {
     return promise;
   }
 
-  retrieveProfile(emailParam: string): Promise<ProfileInstance> {
+  public retrieveProfile(emailParam: string): Promise<ProfileInstance> {
     let promise = new Promise<ProfileInstance>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
         return models.Profile.findOne({ where: { email: emailParam } }).then((profile: ProfileInstance) => {
@@ -49,6 +49,26 @@ export class ProfileService {
         }).catch((error: Error) => {
           logger.error(`Retrieved profile with email =  ${emailParam} got error = ${error.message}`);
           reject(`Retrieved profile with email =  ${emailParam} got error = ${error.message}`);
+        });
+      });
+    });
+
+    return promise;
+  }
+
+  getProfileById(profileIdParam: string): Promise<ProfileInstance> {
+    let promise = new Promise<ProfileInstance>((resolve: Function, reject: Function) => {
+      sequelize.transaction((t: Transaction) => {
+        return models.Profile.findOne({ where: { profile_id: profileIdParam } }).then((profile: ProfileInstance) => {
+          if (profile) {
+            logger.info(`Retrieved profile with email ${profileIdParam} successful !!!`);
+          } else {
+            logger.info(`Profile with email ${profileIdParam} does not exist.`);
+          }
+          resolve(profile);
+        }).catch((error: Error) => {
+          logger.error(`Retrieved profile with email =  ${profileIdParam} got error = ${error.message}`);
+          reject(`Retrieved profile with email =  ${profileIdParam} got error = ${error.message}`);
         });
       });
     });
