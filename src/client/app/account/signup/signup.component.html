@@ -1,8 +1,8 @@
 <div class="center-block animated zoomInUp" style="border: 0px solid #083858; width: 450px; padding: 0 10px 20px 20px;">
     <h1 class="text-center" style="color: #083858;">Sign Up</h1>
 
-    <form class="form" name="form" novalidate>
-        <div class="form-group">
+    <form class="form" name="form" novalidate (ngsubmit)="register()" [formGroup]="signupForm">
+        <!--<div class="form-group">
             <label style="color: #083858;" for="firstName">First Name</label><br/>
             <input type="text" name="firstName" placeholder="Enter First Name" class="form-control" [(ngModel)]="model.firstName" #firstName="ngModel" required autofocus/>
             <div class="help-block">First Name is required</div>
@@ -12,25 +12,47 @@
             <label style="color: #083858;" for="lastName">Last Name</label><br/>
             <input type="text" name="lastName" placeholder="Enter Last Name" class="form-control" [(ngModel)]="model.lastName" #lastName="ngModel" required/>
             <div class="help-block">Last Name is required</div>
+        </div>-->
+        <div formGroupName="emailGroup" [ngClass]="{'has-error': signupForm.get('emailGroup').errors}">
+            <div class="form-group" [ngClass]="{'has-error': (signupForm.controls.emailGroup.controls.email.touched || signupForm.get('emailGroup.email').dirty) && !signupForm.get('emailGroup.email').valid}">
+                <label class="control-label" for="emailId">Email</label><br/>
+                <input id="emailId" type="email" placeholder="Enter email" class="form-control" formControlName="email" />
+                <!--<div class="help-block">Username is required</div>-->
+                <span class="help-block" *ngIf="(signupForm.get('emailGroup.email').touched || signupForm.get('emailGroup.email').dirty) && signupForm.get('emailGroup.email').errors">
+                <span *ngIf="signupForm.get('emailGroup.email').errors.required">Please enter your Email Address</span>
+                <span *ngIf="signupForm.get('emailGroup.email').errors.pattern">Please enter valid Email Address</span>
+                </span>
+            </div>
+
+            <div class="form-group" [ngClass]="{'has-error': (signupForm.controls.emailGroup.controls.confirmEmail.touched || signupForm.get('emailGroup.confirmEmail').dirty) && !signupForm.get('emailGroup.confirmEmail').valid}">
+                <label class="control-label" for="confirmEmailId">Confirm Email</label><br/>
+                <input id="confirmEmailId" type="email" placeholder="Enter Confirm Email" class="form-control" formControlName="confirmEmail" />
+                <!--<div class="help-block">Username is required</div>-->
+                <span class="help-block" *ngIf="(signupForm.get('emailGroup.confirmEmail').touched ||
+                                                signupForm.get('emailGroup.confirmEmail').dirty) &&
+                                                signupForm.get('emailGroup.confirmEmail').errors ||
+                                                signupForm.get('emailGroup').errors ">
+                <span *ngIf="signupForm.get('emailGroup.confirmEmail').errors?.required">Please Confirm Your Email Address</span>
+                <span *ngIf="signupForm.get('emailGroup').errors?.match">The Confirm Email Address does not match the email address</span>
+                </span>
+            </div>
+
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error': (signupForm.get('password').touched || signupForm.get('password').dirty) && !signupForm.get('password').valid}">
+            <label class="control-label" for="passwordId">Password</label><br/>
+            <input id="passwordId" type="password" placeholder="Enter password" class="form-control" formControlName="password" />
+            <span class="help-block" *ngIf="(signupForm.get('password').touched || signupForm.get('password').dirty) && signupForm.get('password').errors">
+                <span *ngIf="signupForm.get('password').errors.required">Please enter your password</span>
+            <span *ngIf="signupForm.get('password').errors.minlength">The Password must be longer then 3 characters</span>
+            </span>
         </div>
 
         <div class="form-group">
-            <label style="color: #083858;" for="username">Email</label><br/>
-            <input type="email" name="email" placeholder="Enter email" class="form-control" [(ngModel)]="model.username" #username="ngModel" required />
-            <div class="help-block">Username is required</div>
-        </div>
-
-        <div class="form-group">
-            <label style="color: #083858;" for="password">Password</label><br/>
-            <input type="password" name="password" placeholder="Enter passwordi" class="form-control" [(ngModel)]="model.password" #password="ngModel" required/>
-            <div class="help-block">Password is required</div>
-        </div>
-
-        <div class="form-group">
-            <button class="btn btn-primary btn-lg btn-login" [disabled]="isLoading">
+            <button class="btn btn-primary btn-lg btn-login" [disabled]="!signupForm.valid">
             Sign up
             </button>
-             <img *ngIf="isLoading" src="../../../assets/loader.gif" />
+            <img *ngIf="isLoading" src="../../../assets/loader.gif" />
             <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
         </div>
 
@@ -46,3 +68,9 @@
     </form>
 
 </div>
+
+<!-- FOR TESTING -->
+<br>Dirty:{{signupForm.dirty}}
+<br>Touch:{{signupForm.touched}}
+<br>Valid:{{signupForm.valid}}
+<br>Value:{{signupForm.value | json}}
