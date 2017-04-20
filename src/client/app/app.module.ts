@@ -12,6 +12,7 @@ import { CatComponent } from './cat/cat.component';
 import { AlertComponent } from './directives/index';
 import { AuthGuard } from './shared/guard/index';
 import { AlertService, AuthenticationService, UserService, DataService } from './services/index';
+import { AppConfig } from './app.config';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AlertService, AuthenticationService, UserService, DataService } from '.
     SharedModule //Shared (multi-instance) objects
   ],
   providers: [
+    AppConfig,
     DataService,
     AuthGuard,
     AlertService,
