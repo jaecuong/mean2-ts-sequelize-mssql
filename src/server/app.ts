@@ -14,7 +14,7 @@ import * as http from "http";
 import * as morgan from "morgan";
 import * as os from "os";
 import * as path from "path";
-// import * as cors from "cors";
+import * as cors from "cors";
 import { configs } from "../configs/index";
 import { logger, skip, stream } from "./utils/index";
 // import { router as productRouter } from "./routers/product-router";
@@ -28,14 +28,14 @@ import { globalRoute } from "./routes/index";
 // import { setupStrategies } from './services/profile/passport';
 
 //options for cors midddleware ---> should review it carefully
-// const options: cors.CorsOptions = {
-//     allowedHeaders: ["X-Requested-With", "Content-Type", "Authorization"], // "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials, X-Access-Token"
-//     credentials: true,
-//     methods: "GET,POST", // 'PUT, GET, POST, DELETE, OPTIONS'
-//     // origin: configs.getServerConfig().apiUrl, // *
-//     origin: "*", // *
-//     preflightContinue: false
-// };
+const options: cors.CorsOptions = {
+    allowedHeaders: ["X-Requested-With", "Content-Type", "Authorization"], // "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials, X-Access-Token"
+    credentials: true,
+    methods: "GET,POST", // 'PUT, GET, POST, DELETE, OPTIONS'
+    // origin: configs.getServerConfig().apiUrl, // *
+    origin: "*", // *
+    preflightContinue: false
+};
 
 interface ServerAddress {
   address: string;
@@ -56,7 +56,7 @@ class Server {
     this._app.use(cookieParser());
     this._app.use(express.static(configs.getServerConfig().publicPath));
     this._app.use(morgan("combined", { skip: skip, stream: <any>stream }));
-    // this._app.use(cors(options)); //deal with any Cross Origin Resource Sharing (CORS) issues we might run into
+    this._app.use(cors(options)); //deal with any Cross Origin Resource Sharing (CORS) issues we might run into
     this._app.use((error: Error, req: Request, res: Response, next: Function) => {
       if (error) {
         logger.error(`Request got error = ${error.message}`);

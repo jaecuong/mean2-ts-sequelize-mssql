@@ -11,22 +11,23 @@ import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http, private config: AppConfig) { }
+  constructor(private http: Http, private config: AppConfig) { }
 
-    login(username: string, password: string) {
-        return this.http.post(this.config.apiUrl + '/authenticate', JSON.stringify({ username: username, password: password }))
-            .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let user = response.json();
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
-            });
-    }
+  login(username: string, password: string) {
+    this.http.get(this.config.apiUrl + '/products', () => { });
+    return this.http.post(this.config.apiUrl + '/authenticate', JSON.stringify({ username: username, password: password }))
+      .map((response: Response) => {
+        // login successful if there's a jwt token in the response
+        let user = response.json();
+        if (user && user.token) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+      });
+  }
 
-    logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-    }
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+  }
 }
