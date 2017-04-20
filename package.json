@@ -10,7 +10,7 @@
         "frontend": "ng serve --open",
         "backend": "concurrently \"tsc -w -p src/server\" \"nodemon\"",
         "dev": "concurrently \"ng serve -pc proxy.conf.json --open\" \"tsc -w -p src/server\" \"nodemon\"",
-        "prod": "concurrently \"ng build -aot -prod && tsc -p server && node dist/server/app.js\"",
+        "prod": "ng build -aot -prod && tsc -p src/server && node dist/server/app.js",
         "lint": "ng lint",
         "clean:node_modules": "del /q .\\node_modules\\*.* && for /d %i in (.\\node_modules\\*.*) do @rmdir /s /q \"%i\" ",
         "clean:dist": "del /q .\\dist\\*.* && for /d %i in (.\\dist\\*.*) do @rmdir /s /q \"%i\" ",
