@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -21,7 +21,7 @@ export class SignupService {
 
   }
 
-  insertAccount(userParam: User) { return this.http.post(this.config.apiUrl + '/users/signup', userParam, this.jwt()); }
+  // insertAccount(userParam: User) { return this.http.post(this.config.apiUrl + '/users/signup', userParam, this.jwt()); }
   updateAccount(userParam: User) { }
   getAccountById(profile_id: number) { }
 
@@ -47,12 +47,12 @@ export class SignupService {
 
   // // private helper methods
 
-  private jwt() {
-    // create authorization header with jwt token
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-      return new RequestOptions({ headers: headers });
-    }
-  }
+  // private jwt() {
+  //   // create authorization header with jwt token
+  //   let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  //   if (currentUser && currentUser.token) {
+  //     let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+  //     return new RequestOptions({ headers: headers });
+  //   }
+  // }
 }
