@@ -12,17 +12,17 @@ export class UserService {
         return this.http.get(this.config.apiUrl + '/users', this.jwt()).map((response: Response) => response.json());
     }
 
-    getById(_id: number) {
-        return this.http.get(this.config.apiUrl + '/users/' + _id, this.jwt()).map((response: Response) => response.json());
+    getById(profile_id: number) {
+        return this.http.get(this.config.apiUrl + '/users/' + profile_id, this.jwt()).map((response: Response) => response.json());
     }
 
     create(user: User) {
         return this.http.post(this.config.apiUrl + '/users/signup', user, this.jwt());
     }
 
-    update(user: User) {
-        return this.http.put(this.config.apiUrl + '/users/' + user.id, user, this.jwt());
-    }
+    // update(user: User) {
+    //     return this.http.put(this.config.apiUrl + '/users/' + user.profile_id, user, this.jwt());
+    // }
 
     delete(_id: number) {
         return this.http.delete(this.config.apiUrl + '/users/' + _id, this.jwt());

@@ -3,6 +3,7 @@ export class User {
    *
    */
   constructor(
+    // public profile_id: number,
     public email = '',
     public password = '',
     public name?: string) {

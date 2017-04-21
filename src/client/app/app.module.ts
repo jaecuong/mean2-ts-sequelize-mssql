@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -28,6 +29,7 @@ import { AppConfig } from './app.config';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     ReactiveFormsModule,
     AppRoutingModule,
     // CoreModule, //Singletonobjects

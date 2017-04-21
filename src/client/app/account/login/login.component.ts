@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { AlertService, AuthenticationService } from '../../services/index';
 import { ToastComponent } from "../../shared/toast/toast.component";
+import { User } from '../../models/index';
 // import { DataService } from '../services/data.service';
 // import { ToastComponent } from '../shared/toast/toast.component';
 
@@ -24,42 +25,48 @@ export class LoginComponent implements OnInit {
   // age = new FormControl('', Validators.required);
   // weight = new FormControl('', Validators.required);
 
-  // constructor(private http: Http,
-  //             private dataService: DataService,
-  //             public toast: ToastComponent,
-  //             private formBuilder: FormBuilder) { }
-  model: any = {};
+  constructor(private fb: FormBuilder) { }
+  model: User = new User();
   isLoading = false;
   returnUrl: string;
+  signinForm: FormGroup;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private toast: ToastComponent) { }
+  // constructor(
+  //   private route: ActivatedRoute,
+  //   private router: Router,
+  //   private authenticationService: AuthenticationService,
+  //   private toast: ToastComponent) { }
 
   ngOnInit() {
     // reset login status
-    this.authenticationService.logout();
+    // this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-  login() {
-    this.isLoading = true;
-    this.authenticationService.login(this.model.username, this.model.password)
-      .subscribe(
-      data => {
-        this.toast.setMessage('Login successfully.', 'success');
-        this.router.navigate([this.returnUrl]);
-      },
-      error => {
-        // this.alertService.error(error);
-        this.toast.setMessage('Could not login ' + error, 'warning');
-        this.isLoading = false;
-      });
+    this.signinForm = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]],
+      password: ''
+    });
   }
+  signin() {
+    console.log(this.signinForm);
+    console.log('Signup = ' + JSON.stringify(this.signinForm.value));
+  }
+  // login() {
+  //   this.isLoading = true;
+  //   this.authenticationService.login(this.model.username, this.model.password)
+  //     .subscribe(
+  //     data => {
+  //       this.toast.setMessage('Login successfully.', 'success');
+  //       this.router.navigate([this.returnUrl]);
+  //     },
+  //     error => {
+  //       // this.alertService.error(error);
+  //       this.toast.setMessage('Could not login ' + error, 'warning');
+  //       this.isLoading = false;
+  //     });
+  // }
 
   // getCats() {
   //   this.dataService.getCats().subscribe(
