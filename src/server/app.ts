@@ -22,19 +22,19 @@ import { sequelize } from "./models/index";
 import { Express, Request, Response } from "express";
 import { Worker } from "cluster";
 import { globalRoute } from "./routes/index";
-// import { flash } from 'connect-flash';
+import { flash } from "connect-flash";
 // import { session } from 'express-session';
 // import { passport } from 'passport';
 // import { setupStrategies } from './services/profile/passport';
 
 //options for cors midddleware ---> should review it carefully
 const options: cors.CorsOptions = {
-    allowedHeaders: ["X-Requested-With", "Content-Type", "Authorization"], // "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials, X-Access-Token"
-    credentials: true,
-    methods: "GET,POST", // 'PUT, GET, POST, DELETE, OPTIONS'
-    // origin: configs.getServerConfig().apiUrl, // *
-    origin: "*", // *
-    preflightContinue: false
+  allowedHeaders: ["X-Requested-With", "Content-Type", "Authorization"], // "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials, X-Access-Token"
+  credentials: true,
+  methods: "GET,POST", // 'PUT, GET, POST, DELETE, OPTIONS'
+  // origin: configs.getServerConfig().apiUrl, // *
+  origin: "*", // *
+  preflightContinue: false
 };
 
 interface ServerAddress {
@@ -71,6 +71,8 @@ class Server {
     this._app.get('/*', function (req, res) {
       res.sendFile(configs.getServerConfig().publicPathHtml);
     });
+
+    this._app.use(flash());
     //enable pre-flight
     // this._app.options("*", cors(options));
     this._server = http.createServer(this._app);
@@ -113,7 +115,7 @@ class Server {
       sequelize.sync().then(() => {
         logger.info("Database synced.");
         logger.info(`Cluster is running on CPU with ${os.cpus().length} logical processors`);
-        for (let c = 0; c < os.cpus().length - 1; c++) {
+        for (let c = 0; c < os.cpus().length; c++) {
           cluster.fork();
         }
 
