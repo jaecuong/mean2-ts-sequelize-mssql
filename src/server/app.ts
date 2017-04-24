@@ -22,7 +22,7 @@ import { sequelize } from "./models/index";
 import { Express, Request, Response } from "express";
 import { Worker } from "cluster";
 import { globalRoute } from "./routes/index";
-import { flash } from "connect-flash";
+// import { flash } from "connect-flash";
 // import { session } from 'express-session';
 // import { passport } from 'passport';
 // import { setupStrategies } from './services/profile/passport';
@@ -72,7 +72,7 @@ class Server {
       res.sendFile(configs.getServerConfig().publicPathHtml);
     });
 
-    this._app.use(flash());
+    // this._app.use(flash());
     //enable pre-flight
     // this._app.options("*", cors(options));
     this._server = http.createServer(this._app);

@@ -34,7 +34,6 @@
     "bootstrap": "^3.3.7",
     "composable-middleware": "^0.3.0",
     "compression": "^1.6.2",
-    "connect-flash": "^0.1.1",
     "continuation-local-storage": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.3",

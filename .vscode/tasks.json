@@ -7,5 +7,6 @@
     "args": ["-w", "-p", "src/server"],
     "showOutput": "always",
     "isBackground": true,
-    "problemMatcher": "$tsc-watch"
+    "problemMatcher": "$tsc-watch",
+    "echoCommand": true
 }
