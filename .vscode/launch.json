@@ -14,9 +14,8 @@
             "preLaunchTask": "tsc",
             "env": {
                 "NODE_ENV": "development"
-            }
-
-
+            },
+            "smartStep": true
         },
         {
             "type": "node",
