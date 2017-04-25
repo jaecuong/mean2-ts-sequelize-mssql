@@ -1,15 +1,16 @@
 import * as jwt from 'express-jwt';
 import * as moment from 'moment';
 import * as bcrypt from 'bcryptjs';
-import { configs } from "../../configs/index";
+import { configs } from '../../configs/index';
 
-// import { ProfileAttributes, ProfileInstance } from "../models/interfaces/profile-interface";
+// import { ProfileAttributes, ProfileInstance } from '../models/interfaces/profile-interface';
 
 export const encodeToken = (profileIdParam: string, emailParam: string) => {
   // iss: The issuer of the token
   // sub: The subject of the token
   // aud: The audience of the token
-  // exp: This will probably be the registered claim most often used. This will define the expiration in NumericDate value. The expiration MUST be after the current date/time.
+  // exp: This will probably be the registered claim most often used. This will define the expiration in NumericDate value.
+  //      The expiration MUST be after the current date/time.
   // nbf: Defines the time before which the JWT MUST NOT be accepted for processing
   // iat: The time the JWT was issued. Can be used to determine the age of the JWT
   // jti: Unique identifier for the JWT. Can be used to prevent the JWT from being replayed. This is helpful for a one time use token.
@@ -27,10 +28,9 @@ export const decodeToken = (token: object, callback: Function) => {
   const payload = jwt.decode(token, configs.getServerConfig().session.secret);
   const now = moment().unix();
   // check if the token has expired
-  if (now > payload.exp)
+  if (now > payload.exp) {
     callback('Token has expired.');
-  else
-    callback(null, payload);
+  } else { callback(null, payload); }
 }
 
 export const encrypt = (passwdParam: string): string => {
@@ -42,8 +42,9 @@ export const makeSalt = (): string => {
 }
 export const validatePassword = (passwdParam: string, dbPasswd: string): boolean => {
   const bool = bcrypt.compareSync(passwdParam, dbPasswd);
-  if (!bool) throw new Error('Password do not match !!! ');
-  else return true;
+  if (!bool) {
+    throw new Error('Password do not match !!! ');
+  } else { return true; }
 }
 
 export const comparePassword = (passwdParam: string, dbPasswd: string, callback: any): void => {

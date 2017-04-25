@@ -1,7 +1,7 @@
-import { logger } from "../../utils/index";
-import { models, sequelize } from "../../models/index";
-import { ProductAttributes, ProductInstance } from "../../models/interfaces/product-interface";
-import { Transaction } from "sequelize";
+import { logger } from '../../utils/index';
+import { models, sequelize } from '../../models/index';
+import { ProductAttributes, ProductInstance } from '../../models/interfaces/product-interface';
+import { Transaction } from 'sequelize';
 
 class ProductService {
   createProduct(productAttributes: ProductAttributes): Promise<ProductInstance> {

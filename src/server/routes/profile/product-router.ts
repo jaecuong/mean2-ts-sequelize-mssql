@@ -1,6 +1,6 @@
-import { ProductRepository } from "../../services/index";
-import { ProductInstance } from "../../models/interfaces/product-interface";
-import { Request, Response, Router } from "express";
+import { ProductRepository } from '../../services/index';
+import { ProductInstance } from '../../models/interfaces/product-interface';
+import { Request, Response, Router } from 'express';
 
 // export const router = Router();
 
@@ -20,7 +20,7 @@ export const GetAllProducts = (req: Request, res: Response) => {
   });
 }
 
-// router.post("/:name", (req: Request, res: Response) => {
+// router.post('/:name', (req: Request, res: Response) => {
 //   ProductRepository.updateProduct(req.params.name, req.body).then(() => {
 //     return res.sendStatus(200);
 //   }).catch((error: Error) => {
@@ -28,7 +28,7 @@ export const GetAllProducts = (req: Request, res: Response) => {
 //   });
 // });
 
-// router.get("/:name", (req: Request, res: Response) => {
+// router.get('/:name', (req: Request, res: Response) => {
 //   ProductRepository.retrieveProduct(req.params.name).then((product: ProductInstance) => {
 //     if (product) {
 //       return res.send(product);
@@ -41,7 +41,7 @@ export const GetAllProducts = (req: Request, res: Response) => {
 // });
 
 
-// router.delete("/:name", (req: Request, res: Response) => {
+// router.delete('/:name', (req: Request, res: Response) => {
 //   ProductRepository.deleteProduct(req.params.name).then(() => {
 //     return res.sendStatus(200);
 //   }).catch((error: Error) => {

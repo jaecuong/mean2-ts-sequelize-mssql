@@ -1,12 +1,12 @@
-import * as cls from "continuation-local-storage";
-import * as fs from "fs";
-import * as path from "path";
-import * as SequelizeStatic from "sequelize";
-import { configs } from "../../configs/index";
-import { logger } from "../utils/index";
-import { ProductAttributes, ProductInstance } from "./interfaces/product-interface";
-import { ProfileInstance, ProfileAttributes } from "./interfaces/profile-interface";
-import { Sequelize } from "sequelize";
+import * as cls from 'continuation-local-storage';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as SequelizeStatic from 'sequelize';
+import { configs } from '../../configs/index';
+import { logger } from '../utils/index';
+import { ProductAttributes, ProductInstance } from './interfaces/product-interface';
+import { ProfileInstance, ProfileAttributes } from './interfaces/profile-interface';
+import { Sequelize } from 'sequelize';
 
 export interface SequelizeModels {
   Product: SequelizeStatic.Model<ProductInstance, ProductAttributes>;
@@ -20,20 +20,20 @@ class Database {
 
   constructor() {
     this._basename = path.basename(module.filename);
-    let dbConfig = configs.getDatabaseConfig();
+    const dbConfig = configs.getDatabaseConfig();
 
     if (dbConfig.logging) {
       dbConfig.logging = logger.info;
     }
 
-    (SequelizeStatic as any).cls = cls.createNamespace("sequelize-transaction");
+    (SequelizeStatic as any).cls = cls.createNamespace('sequelize-transaction');
     this._sequelize = new SequelizeStatic(dbConfig.database, dbConfig.username,
       dbConfig.password, dbConfig);
     this._models = ({} as any);
 
     // Comment this code when Debug In VSCODE
     // fs.readdirSync(__dirname).filter((file: string) => {
-    //   return (file !== this._basename) && (file !== "interfaces");
+    //   return (file !== this._basename) && (file !== 'interfaces');
     // }, (err: Error) => {
     //   console.log(`Error = ${err} `);
     // }).forEach((file: string) => {
@@ -42,7 +42,7 @@ class Database {
     // });
 
     Object.keys(this._models).forEach((modelName: string) => {
-      if (typeof this._models[modelName].associate === "function") {
+      if (typeof this._models[modelName].associate === 'function') {
         this._models[modelName].associate(this._models);
       }
     });
@@ -78,6 +78,6 @@ export const sequelize = database.getSequelize();
 //     }
 //   }
 
-//   throw new Error("Couldn't connect to database!");
+//   throw new Error('Couldn't connect to database!');
 // }
 // https://github.com/sequelize/sequelize/issues/6524

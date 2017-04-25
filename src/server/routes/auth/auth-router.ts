@@ -1,10 +1,10 @@
 
-import { ProfileRepository } from "../../services/index";
-import { ProfileInstance, ProfileAttributes } from "../../models/interfaces/profile-interface";
-import { Request, Response, Router } from "express";
+import { ProfileRepository } from '../../services/index';
+import { ProfileInstance, ProfileAttributes } from '../../models/interfaces/profile-interface';
+import { Request, Response, Router } from 'express';
 import { configs } from '../../../configs/index';
 import { logger } from '../../utils/index';
-import { models } from "../../models/index";
+import { models } from '../../models/index';
 import jwt from 'jsonwebtoken';
 
 

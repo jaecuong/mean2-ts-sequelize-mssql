@@ -1,7 +1,7 @@
-import { logger } from "../../utils/index";
-import { models, sequelize } from "../../models/index";
-import { ProfileAttributes, ProfileInstance } from "../../models/interfaces/profile-interface";
-import { Transaction } from "sequelize";
+import { logger } from '../../utils/index';
+import { models, sequelize } from '../../models/index';
+import { ProfileAttributes, ProfileInstance } from '../../models/interfaces/profile-interface';
+import { Transaction } from 'sequelize';
 import * as bcrypt from 'bcryptjs';
 import { encrypt, validatePassword } from '../../utils/jwtHelper';
 

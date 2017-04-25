@@ -1,15 +1,15 @@
-import * as cluster from "cluster";
-import * as mkdirp from "mkdirp";
-import * as path from "path";
-import { configs } from "../../configs/index";
-import { transports, Logger } from "winston";
-import { Request, Response } from "express";
+import * as cluster from 'cluster';
+import * as mkdirp from 'mkdirp';
+import * as path from 'path';
+import { configs } from '../../configs/index';
+import { transports, Logger } from 'winston';
+import { Request, Response } from 'express';
 
-let config = configs.getLoggingConfig();
-config.file.filename = `${path.join(config.directory, "../logs")}/${config.file.filename}`;
+const config = configs.getLoggingConfig();
+config.file.filename = `${path.join(config.directory, '../logs')}/${config.file.filename}`;
 
 if (cluster.isMaster) {
-  mkdirp.sync(path.join(config.directory, "../logs"));
+  mkdirp.sync(path.join(config.directory, '../logs'));
 }
 
 export const logging = new Logger({
