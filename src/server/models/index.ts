@@ -31,13 +31,14 @@ class Database {
       dbConfig.password, dbConfig);
     this._models = ({} as any);
 
-    // Comment this code when Debug In VSCODE
+    // Comment this code when Debug In VSCODE and modify sourmap to true in tsconfig global
+    // UnComment this code in production mode pand modify sourmap to false in tsconfig global
     // fs.readdirSync(__dirname).filter((file: string) => {
     //   return (file !== this._basename) && (file !== 'interfaces');
     // }, (err: Error) => {
     //   console.log(`Error = ${err} `);
     // }).forEach((file: string) => {
-    //   let model = this._sequelize.import(path.join(__dirname, file));
+    //   const model = this._sequelize.import(path.join(__dirname, file));
     //   this._models[(model as any).name] = model;
     // });
 

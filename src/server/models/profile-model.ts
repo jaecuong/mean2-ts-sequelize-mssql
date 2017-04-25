@@ -17,7 +17,7 @@ export default function (sequelize: Sequelize, dataTypes: DataTypes):
       classMethods: {},
       timestamps: true,
       createdAt: 'CreatedDate',
-      updatedAt: 'ChangedDate',
+      updatedAt: 'ChangedDate'
     }, {
       hooks: { // http://docs.sequelizejs.com/en/latest/docs/hooks/
         beforeCreate: function (Profile, options) {
