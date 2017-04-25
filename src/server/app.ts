@@ -111,7 +111,8 @@ class Server {
   };
 
   start(): void {
-    if (cluster.isMaster && process.env.NODE_ENV !== "development") {
+    // if (cluster.isMaster) {//Use this line when running in production mode
+    if (cluster.isMaster && process.env.NODE_ENV !== "development") { //Use this line when running in development mode
       sequelize.sync().then(() => {
         logger.info("Database synced.");
         logger.info(`Cluster is running on CPU with ${os.cpus().length} logical processors`);
