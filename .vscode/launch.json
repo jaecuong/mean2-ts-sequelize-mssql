@@ -10,8 +10,12 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceRoot}\\src\\server\\app.ts",
-            "outFiles": ["${workspaceRoot}\\dist\\server\\app.js", "${workspaceRoot}\\dist\\**\\*.js"],
-            "preLaunchTask": "tsc"
+            "outFiles": ["${workspaceRoot}\\dist\\**\\*.js"],
+            "preLaunchTask": "tsc",
+            "env": {
+                "NODE_ENV": "development"
+            }
+
 
         },
         {

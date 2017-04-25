@@ -56,7 +56,7 @@ class Server {
     this._app.use(cookieParser());
     this._app.use(express.static(configs.getServerConfig().publicPath));
     this._app.use(morgan("combined", { skip: skip, stream: <any>stream }));
-    this._app.use(cors(options)); //deal with any Cross Origin Resource Sharing (CORS) issues we might run into
+    // this._app.use(cors(options)); //deal with any Cross Origin Resource Sharing (CORS) issues we might run into
     this._app.use((error: Error, req: Request, res: Response, next: Function) => {
       if (error) {
         logger.error(`Request got error = ${error.message}`);
@@ -111,7 +111,7 @@ class Server {
   };
 
   start(): void {
-    if (cluster.isMaster) {
+    if (cluster.isMaster && process.env.NODE_ENV !== "development") {
       sequelize.sync().then(() => {
         logger.info("Database synced.");
         logger.info(`Cluster is running on CPU with ${os.cpus().length} logical processors`);
