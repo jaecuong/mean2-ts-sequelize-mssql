@@ -16,7 +16,8 @@
                 "NODE_ENV": "development"
             },
             "smartStep": true,
-            "protocol": "inspector"
+            "protocol": "inspector",
+            "console": "integratedTerminal"
         },
         {
             "type": "node",
