@@ -9,13 +9,14 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}\\src\\server\\app.ts",
-            "outFiles": ["${workspaceRoot}\\dist\\**\\*.js"],
+            "program": "${workspaceRoot}/src/server/app.ts",
+            "outFiles": ["${workspaceRoot}/dist/server/app.js", "${workspaceRoot}/dist/**/*.js"],
             "preLaunchTask": "tsc",
             "env": {
                 "NODE_ENV": "development"
             },
-            "smartStep": true
+            "smartStep": true,
+            "protocol": "inspector"
         },
         {
             "type": "node",

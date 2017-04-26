@@ -65,6 +65,7 @@ export const models = database.getModels();
 export const sequelize = database.getSequelize();
 
 
+// tslint:disable-next-line:max-line-length
 // Ping checks that the database server can be connected to. It attempts to connect every second for 60 seconds, before giving up and throwing
 // an error back up to the chain.  This function is especially useful when using Docker Compose with a linked DB, which may not always be ready before
 // the API server starts

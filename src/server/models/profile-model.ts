@@ -6,7 +6,7 @@ import { ProfileAttributes, ProfileInstance } from './interfaces/profile-interfa
 
 export default function (sequelize: Sequelize, dataTypes: DataTypes):
   SequelizeStatic.Model<ProfileInstance, ProfileAttributes> {
-  let Profile = sequelize.define<ProfileInstance, ProfileAttributes>('Profile', {
+  const Profile = sequelize.define<ProfileInstance, ProfileAttributes>('Profile', {
     Profile_Id: { type: dataTypes.BIGINT, allowNull: false, primaryKey: true, autoIncrement: true },
     Name: { type: dataTypes.STRING(50), allowNull: true },
     Email: { type: dataTypes.STRING(50), allowNull: false, unique: true },
@@ -20,9 +20,11 @@ export default function (sequelize: Sequelize, dataTypes: DataTypes):
       updatedAt: 'ChangedDate'
     }, {
       hooks: { // http://docs.sequelizejs.com/en/latest/docs/hooks/
+        // tslint:disable-next-line:no-shadowed-variable
         beforeCreate: function (Profile, options) {
           Profile.CreatedDate = Date.now();
         },
+        // tslint:disable-next-line:no-shadowed-variable
         beforeUpdate: function (Profile, options) {
           Profile.ChangedDate = Date.now();
         }

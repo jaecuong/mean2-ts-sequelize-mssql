@@ -9,8 +9,8 @@ const routes = Router();
 
 export const globalRoute = (app: Express): void => {
 
-  let requireAuth = passport.authenticate('jwt', { session: false }); //use for the other route
-  let requireLogin = passport.authenticate('local', { session: false }); // use for route /api/auth/login only
+  const requireAuth = passport.authenticate('jwt', { session: false }); // use for the other route
+  const requireLogin = passport.authenticate('local', { session: false }); // use for route /api/auth/login only
   // Auth Routes
   app.use('/api/auth', routes.post('/signup', signUp));
   app.use('/api/auth', routes.post('/login', requireLogin, login));

@@ -27,8 +27,9 @@ import { globalRoute } from './routes/index';
 // import { passport } from 'passport';
 // import { setupStrategies } from './services/profile/passport';
 
-//options for cors midddleware ---> should review it carefully
+// options for cors midddleware ---> should review it carefully
 const options: cors.CorsOptions = {
+  // tslint:disable-next-line:max-line-length
   allowedHeaders: ['X-Requested-With', 'Content-Type', 'Authorization'], // 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials, X-Access-Token'
   credentials: true,
   methods: 'GET,POST', // 'PUT, GET, POST, DELETE, OPTIONS'
@@ -65,6 +66,7 @@ class Server {
     });
 
     // use JWT auth to secure the api
+    // tslint:disable-next-line:max-line-length
     // this._app.use(expressJwt({ secret: configs.getServerConfig().session.secret }).unless({ path: ['/profiles/authen', '/profiles/signup','/profiles/signin'] }));
     globalRoute(this._app);
 
@@ -73,7 +75,7 @@ class Server {
     });
 
     // this._app.use(flash());
-    //enable pre-flight
+    // enable pre-flight
     // this._app.options('*', cors(options));
     this._server = http.createServer(this._app);
 
@@ -112,7 +114,7 @@ class Server {
 
   start(): void {
     // if (cluster.isMaster) {//Use this line when running in production mode
-    if (cluster.isMaster && process.env.NODE_ENV !== 'development') { //Use this line when running in development mode
+    if (cluster.isMaster && process.env.NODE_ENV !== 'development') { // Use this line when running in development mode
       sequelize.sync().then(() => {
         logger.info('Database synced.');
         logger.info(`Cluster is running on CPU with ${os.cpus().length} logical processors`);
@@ -133,9 +135,17 @@ class Server {
         logger.error(`Database synced got error : ${error.message}`);
       });
     } else {
-      this._server.listen(configs.getServerConfig().port);
-      this._server.on('error', error => this._onError(error));
-      this._server.on('listening', () => this._onListening());
+      sequelize.sync().then(() => {
+        logger.info('Database synced.');
+
+        this._server.listen(configs.getServerConfig().port);
+        this._server.on('error', error => this._onError(error));
+        this._server.on('listening', () => this._onListening());
+
+      }).catch((error: Error) => {
+        logger.error(`Database synced got error : ${error.message}`);
+      });
+
     }
   }
 
@@ -145,7 +155,7 @@ class Server {
   }
 }
 
-let server = new Server();
+const server = new Server();
 server.start();
 process.on('SIGINT', () => {
   server.stop();
