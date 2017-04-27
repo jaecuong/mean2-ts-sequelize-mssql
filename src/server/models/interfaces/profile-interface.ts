@@ -1,4 +1,4 @@
-import { Instance } from "sequelize";
+import { Instance } from 'sequelize';
 
 export interface ProfileAttributes {
   Profile_Id: number;

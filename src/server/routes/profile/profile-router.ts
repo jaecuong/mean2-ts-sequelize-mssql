@@ -72,8 +72,8 @@ import { Request, Response, Router } from 'express';
 // });
 
 export const GetAllProfiles = (req: Request, res: Response) => {
-  ProfileRepository.retrieveProfiles().then((profiles: Array<ProfileInstance>) => {
-    return res.send(profiles);
+  ProfileRepository.retrieveProfiles().then((profilesResult: Array<ProfileInstance>) => {
+    return res.send(profilesResult);
   }).catch((error: Error) => {
     return res.status(500).send(error);
   });

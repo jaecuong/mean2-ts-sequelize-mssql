@@ -28,20 +28,20 @@ export const signUp = (req: Request, res: Response, next: Function) => {
   // var password = req.body.password;
   // var role = req.body.role;
 
-  if (!req.body.email) {
+  if (!req.body.Email) {
     return res.status(422).send({ error: 'You must enter an email address' });
   }
 
-  if (!req.body.password) {
+  if (!req.body.Passwd) {
     return res.status(422).send({ error: 'You must enter a password' });
   }
 
-  ProfileRepository.retrieveProfile(req.body.email).then((existingUser: ProfileInstance) => {
+  ProfileRepository.retrieveProfile(req.body.Email).then((existingUser: ProfileInstance) => {
     if (existingUser) {
       return res.status(422).send({ error: 'Email address is already in use' });
     }
     ProfileRepository.createProfile(req.body).then((profile: ProfileInstance) => {
-      var profileInfo = setUserInfo(profile);
+      const profileInfo = setUserInfo(profile);
 
       res.status(201).json({
         token: 'JWT ' + generateToken(profileInfo),
@@ -50,12 +50,12 @@ export const signUp = (req: Request, res: Response, next: Function) => {
 
       return res.status(201).send(profile);
     }, (err: Error) => {
-      logger.error(`Create profile ${req.body.email} error = ${err.message}`);
+      logger.error(`Create profile ${req.body.Email} error = ${err.message}`);
       return next(err);
     });
 
   }, (err: Error) => {
-    logger.error(`Signup ${req.body.email} error = ${err.message}`);
+    logger.error(`Signup ${req.body.Email} error = ${err.message}`);
     return next(err);
   });
 

@@ -17,15 +17,15 @@ export interface DatabaseConfig {
 }
 
 export const databaseConfig: DatabaseConfig = {
-  username: "sa",
-  password: "123",
-  database: "LinkReview",
-  host: "127.0.0.1",
+  username: 'sa',
+  password: '123',
+  database: 'LinkReview',
+  host: '127.0.0.1',
   port: 1433,
-  dialect: "mssql",
+  dialect: 'mssql',
   logging: true,  // use for debug and develop only . Should be 'false' in production mode
   force: true,
-  timezone: "+00:00",
+  timezone: '+00:00',
   maxConcurrentQueries: 100, // default ---> 50
   pool: {
     max: 5000,
