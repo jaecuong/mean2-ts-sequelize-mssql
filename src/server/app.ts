@@ -135,16 +135,16 @@ class Server {
         logger.error(`Database synced got error : ${error.message}`);
       });
     } else {
-      sequelize.sync().then(() => {
-        logger.info('Database synced.');
+      this._server.listen(configs.getServerConfig().port);
+      this._server.on('error', error => this._onError(error));
+      this._server.on('listening', () => this._onListening());
 
-        this._server.listen(configs.getServerConfig().port);
-        this._server.on('error', error => this._onError(error));
-        this._server.on('listening', () => this._onListening());
+      // sequelize.sync().then(() => {
+      //   logger.info('Database synced.');
 
-      }).catch((error: Error) => {
-        logger.error(`Database synced got error : ${error.message}`);
-      });
+      // }).catch((error: Error) => {
+      //   logger.error(`Database synced got error : ${error.message}`);
+      // });
 
     }
   }

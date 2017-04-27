@@ -33,14 +33,16 @@ class Database {
 
     // Comment this code when Debug In VSCODE and modify sourmap to true in tsconfig global
     // UnComment this code in production mode pand modify sourmap to false in tsconfig global
-    // fs.readdirSync(__dirname).filter((file: string) => {
-    //   return (file !== this._basename) && (file !== 'interfaces');
-    // }, (err: Error) => {
-    //   console.log(`Error = ${err} `);
-    // }).forEach((file: string) => {
-    //   const model = this._sequelize.import(path.join(__dirname, file));
-    //   this._models[(model as any).name] = model;
-    // });
+    fs.readdirSync(__dirname).filter((file: string) => {
+      return (file !== this._basename)
+        && (file !== 'interfaces') // exlucde interface files
+        && (file.indexOf('map') < 0); // exclude .map files
+    }, (err: Error) => {
+      console.log(`Error = ${err} `);
+    }).forEach((file: string) => {
+      const model = this._sequelize.import(path.join(__dirname, file));
+      this._models[(model as any).name] = model;
+    });
 
     Object.keys(this._models).forEach((modelName: string) => {
       if (typeof this._models[modelName].associate === 'function') {

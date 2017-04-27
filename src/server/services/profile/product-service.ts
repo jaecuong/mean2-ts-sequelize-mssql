@@ -5,7 +5,7 @@ import { Transaction } from 'sequelize';
 
 class ProductService {
   createProduct(productAttributes: ProductAttributes): Promise<ProductInstance> {
-    let promise = new Promise<ProductInstance>((resolve: Function, reject: Function) => {
+    const promise = new Promise<ProductInstance>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
         return models.Product.create(productAttributes).then((product: ProductInstance) => {
           logger.info(`Created product with name ${productAttributes.name} successful !!!`);
@@ -21,7 +21,7 @@ class ProductService {
   }
 
   retrieveProduct(name: string): Promise<ProductInstance> {
-    let promise = new Promise<ProductInstance>((resolve: Function, reject: Function) => {
+    const promise = new Promise<ProductInstance>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
         return models.Product.findOne({ where: { name: name } }).then((product: ProductInstance) => {
           if (product) {
@@ -41,7 +41,7 @@ class ProductService {
   }
 
   retrieveProducts(): Promise<Array<ProductInstance>> {
-    let promise = new Promise<Array<ProductInstance>>((resolve: Function, reject: Function) => {
+    const promise = new Promise<Array<ProductInstance>>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
         return models.Product.findAll().then((products: Array<ProductInstance>) => {
           logger.info(`Retrieved all products successful !!!`);
@@ -57,7 +57,7 @@ class ProductService {
   }
 
   updateProduct(name: string, productAttributes: any): Promise<void> {
-    let promise = new Promise<void>((resolve: Function, reject: Function) => {
+    const promise = new Promise<void>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
         return models.Product.update(productAttributes, { where: { name: name } })
           .then((results: [number, Array<ProductInstance>]) => {
@@ -78,7 +78,7 @@ class ProductService {
   }
 
   deleteProduct(name: string): Promise<void> {
-    let promise = new Promise<void>((resolve: Function, reject: Function) => {
+    const promise = new Promise<void>((resolve: Function, reject: Function) => {
       sequelize.transaction((t: Transaction) => {
         return models.Product.destroy({ where: { name: name } }).then((afffectedRows: number) => {
           if (afffectedRows > 0) {

@@ -9,15 +9,15 @@ const routes = Router();
 
 export const globalRoute = (app: Express): void => {
 
-  const requireAuth = passport.authenticate('jwt', { session: false }); // use for the other route
-  const requireLogin = passport.authenticate('local', { session: false }); // use for route /api/auth/login only
-  // Auth Routes
-  app.use('/api/auth', routes.post('/signup', signUp));
-  app.use('/api/auth', routes.post('/login', requireLogin, login));
-  // for testing only
-  app.use('/api/auth', routes.get('/protected', requireAuth, (req: Request, res: Response) => {
-    res.send({ content: 'Success' });
-  }));
+  // const requireAuth = passport.authenticate('jwt', { session: false }); // use for the other route
+  // const requireLogin = passport.authenticate('local', { session: false }); // use for route /api/auth/login only
+  // // Auth Routes
+  // app.use('/api/auth', routes.post('/signup', signUp));
+  // app.use('/api/auth', routes.post('/login', requireLogin, login));
+  // // for testing only
+  // app.use('/api/auth', routes.get('/protected', requireAuth, (req: Request, res: Response) => {
+  //   res.send({ content: 'Success' });
+  // }));
 
 
   app.use('/api/products', routes.get('/', GetAllProducts));
