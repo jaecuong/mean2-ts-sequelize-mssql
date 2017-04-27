@@ -138,7 +138,7 @@ class Server {
       this._server.listen(configs.getServerConfig().port);
       this._server.on('error', error => this._onError(error));
       this._server.on('listening', () => this._onListening());
-
+      // db.sync will be used only 1 time at the beginning of production stage
       // sequelize.sync().then(() => {
       //   logger.info('Database synced.');
 

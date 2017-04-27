@@ -40,6 +40,7 @@ class Database {
     }, (err: Error) => {
       console.log(`Error = ${err} `);
     }).forEach((file: string) => {
+      // logger.info(`MODEL IN FILE = ${file}`);
       const model = this._sequelize.import(path.join(__dirname, file));
       this._models[(model as any).name] = model;
     });

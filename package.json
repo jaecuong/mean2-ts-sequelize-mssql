@@ -53,6 +53,7 @@
     "rxjs": "^5.3.0",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.0",
+    "shelljs": "^0.7.7",
     "tedious": "^2.0.0",
     "tether": "^1.4.0",
     "winston": "^2.3.1",
