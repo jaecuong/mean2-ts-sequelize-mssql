@@ -20,7 +20,7 @@ export const databaseConfig: DatabaseConfig = {
   username: 'sa',
   password: '123',
   database: 'LinkReview',
-  host: '127.0.0.1',
+  host: '192.168.1.40',
   port: 1433,
   dialect: 'mssql',
   logging: true,  // use for debug and develop only . Should be 'false' in production mode
