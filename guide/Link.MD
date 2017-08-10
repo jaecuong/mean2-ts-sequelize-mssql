@@ -7,3 +7,4 @@ http://www.mithunvp.com/typescript-tutorials-setting-visual-studio-code/
 https://jonathanmh.com/express-passport-json-web-token-jwt-authentication-beginners/
 https://www.joshmorony.com/creating-role-based-authentication-with-passport-in-ionic-2-part-1/
 https://www.joshmorony.com/creating-role-based-authentication-with-passport-in-ionic-2-part-2/
+https://www.djamware.com/post/58eba06380aca72673af8500/node-express-mongoose-and-passportjs-rest-api-authentication
